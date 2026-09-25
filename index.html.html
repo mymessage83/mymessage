@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mensagem Secreta</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;font-family:Arial,Helvetica,sans-serif;color:#f5f5f5;background:radial-gradient(circle at top,#26334d 0,#111827 45%,#070b12 100%)}
+.card{width:100%;max-width:430px;padding:34px 28px;text-align:center;background:rgba(17,24,39,.88);border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.45);backdrop-filter:blur(12px)}
+.icon{font-size:48px;margin-bottom:12px} h1{margin:0 0 10px;font-size:27px}.subtitle{margin:0 0 24px;color:#aeb8c8;line-height:1.5}
+input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #3a465a;background:#0b1220;color:white;font-size:16px;outline:none}
+input:focus{border-color:#7c9cff;box-shadow:0 0 0 3px rgba(124,156,255,.12)}
+button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:12px;background:#6d7cff;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.08)} #error{display:none;color:#ff8f8f;margin-top:12px;font-size:14px}
+#message{display:none;text-align:left;animation:show .5s ease}.message-box{margin-top:22px;padding:20px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);line-height:1.7;white-space:pre-wrap}
+.small{margin-top:22px;color:#778196;font-size:12px}@keyframes show{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div id="login">
+    <div class="icon">🔐</div>
+    <h1>Mensagem Secreta</h1>
+    <p class="subtitle">Você recebeu uma mensagem protegida.<br>Digite a senha para revelar o conteúdo.</p>
+    <input id="password" type="password" placeholder="Digite a senha" autocomplete="off">
+    <button onclick="openMessage()">Desbloquear mensagem</button>
+    <div id="error">Senha incorreta. Tente novamente.</div>
+    <div class="small">Mensagem protegida</div>
+  </div>
+  <div id="message">
+    <div class="icon">💌</div>
+    <h1>Mensagem desbloqueada</h1>
+    <div class="message-box" id="messageText"></div>
+    <div class="small">Você recebeu esta mensagem de forma especial.</div>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIGURAÇÃO ===== */
+const SENHA = "123456";
+
+const MENSAGEM = `Olá!
+
+Esta é uma mensagem secreta.
+
+Você pode substituir este texto pelo conteúdo que quiser enviar.
+
+Abraços!`;
+
+/* ===== FUNCIONAMENTO ===== */
+document.getElementById("password").addEventListener("keydown", function(event){
+  if(event.key === "Enter") openMessage();
+});
+
+function openMessage(){
+  const password = document.getElementById("password").value;
+  const error = document.getElementById("error");
+
+  if(password === SENHA){
+    document.getElementById("login").style.display = "none";
+    document.getElementById("message").style.display = "block";
+    document.getElementById("messageText").textContent = MENSAGEM;
+  }else{
+    error.style.display = "block";
+    document.getElementById("password").value = "";
+    document.getElementById("password").focus();
+  }
+}
+</script>
+</body>
+</html>
