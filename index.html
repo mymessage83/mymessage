@@ -31,25 +31,17 @@ button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:12px;backg
 <div class="icon">💌</div>
 <h1>Mensagem desbloqueada</h1>
 <div class="message-box" id="messageText"></div>
-<div class="small">Olá, vamos no encontrar então?.</div>
+<div class="small">Você recebeu essa mensagem de forma especial.</div>
 </div>
 </div>
 
 <script>
-/*
-A senha não fica armazenada em texto puro.
-Senha de exemplo atual: 123456
-Para trocar, gere o SHA-256 da nova senha e substitua SENHA_HASH.
-*/
+
 const SENHA_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
 
 const MENSAGEM = `Olá!
 
-Esta é uma mensagem secreta.
-
-Você pode substituir este texto pelo conteúdo que quiser enviar.
-
-Abraços!`;
+Vamos nos encontrar então?`;
 
 document.getElementById("password").addEventListener("keydown", function(event){
   if(event.key === "Enter") openMessage();
